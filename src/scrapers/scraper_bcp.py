@@ -20,7 +20,7 @@ def scrap():
     if table:
         data_points = {}
         bank_id = get_bank_id("BCP")
-
+        found_4_1_6 = False
 
         # Recorrer todas las filas una sola vez
         for tr in table.find_all('tr'):
@@ -30,12 +30,18 @@ def scrap():
                 # Guardar la fila según su identificador
                 key = normalized_text.split('\n')[0].strip()
                 data_points[key] = normalized_text.split('\n')
-
+                if key == '4.1.6.':
+                    found_4_1_6 = True
+            elif found_4_1_6 and not normalized_text.startswith('4'):
+                # Esta es la línea sin numeración después de 4.1.6.
+                data_points['unnumbered_after_4_1_6'] = normalized_text.split('\n')
+                break 
         # Extraer los títulos y los puntos específicos
         # column_titles = data_points.get('4.', [])
         point_4_1_3 = data_points.get('4.1.3.', [])
         point_4_1_4 = data_points.get('4.1.4', [])
-        point_4_1_6 = data_points.get('4.1.6.', [])
+        unnumbered_point = data_points.get('unnumbered_after_4_1_6', [])
+
 
 
         data = [
@@ -56,12 +62,12 @@ def scrap():
                 "amount": point_4_1_4[4]
             },
             {
-                "description": point_4_1_6[1],
-                "frequency": point_4_1_6[5],
-                "currency": point_4_1_6[3],
+                "description": unnumbered_point[0],
+                "frequency": unnumbered_point[4] if len(unnumbered_point) > 4 else "",
+                "currency": unnumbered_point[2] if len(unnumbered_point) > 2 else "",
                 "card_type": "debit",
                 "bank": bank_id,
-                "amount": point_4_1_6[4]
+                "amount": unnumbered_point[3] if len(unnumbered_point) > 3 else ""
             }
         ]
 

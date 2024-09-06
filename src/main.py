@@ -10,8 +10,6 @@ def main():
     scraper_bcp.scrap()
     scraper_bg.scrap()
     scraper_bu.scrap()
-    
-
 
 if __name__ == "__main__":
     main()

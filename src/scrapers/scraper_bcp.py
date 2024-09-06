@@ -51,6 +51,7 @@ def scrap():
                 "currency": point_4_1_3[3],
                 "card_type": "debit",
                 "bank": bank_id,
+                "number": 1,
                 "amount": point_4_1_3[4]
             },
             {
@@ -59,6 +60,7 @@ def scrap():
                 "currency": point_4_1_4[3],
                 "card_type": "debit",
                 "bank": bank_id,
+                "number": 2,
                 "amount": point_4_1_4[4]
             },
             {
@@ -67,6 +69,7 @@ def scrap():
                 "currency": unnumbered_point[2] if len(unnumbered_point) > 2 else "",
                 "card_type": "debit",
                 "bank": bank_id,
+                "number": 3,
                 "amount": unnumbered_point[3] if len(unnumbered_point) > 3 else ""
             }
         ]

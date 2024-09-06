@@ -22,10 +22,12 @@ def scrap():
         # Extract table data
         table_data = []
         lines = text.split('\n')
-
+        number = 0
         bank_id = get_bank_id("BNB")
+
         for line in lines:
             if line.startswith('5.14.'):
+                number+=1
                 # Use regex to separate description from the rest
                 match = re.match(r'(5\.14\.\S+\s*.*?)\s+(\S+)\s+(\S+)$', line)
                 if match:
@@ -49,6 +51,7 @@ def scrap():
                         "currency": currency,
                         "card_type": "debit",
                         "amount": amount,
+                        "number": number,
                         "bank": bank_id
                     })
 

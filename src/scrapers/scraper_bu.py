@@ -7,7 +7,7 @@ import pdfplumber
 from src.uploader import post_data_to_api, get_bank_id
 
 
-def parse_line(line):
+def parse_line(line,number):
     """Parse a line from the tariff table and return a dictionary with the data."""
     frequencies = ["quincenal", "diario", "mensual", "semanal"]
     
@@ -44,6 +44,7 @@ def parse_line(line):
         "currency": currency,
         "card_type": "debit",
         "bank": bank_id,
+        "number": number,
         "amount": amount
     }
 
@@ -60,6 +61,7 @@ def scrap():
     with pdfplumber.open(pdf_file) as pdf:
         # Busca en todas las páginas
         target_data = None
+        number = 0
         for page in pdf.pages:
             tables = page.extract_tables()
             for table in tables:
@@ -75,9 +77,12 @@ def scrap():
         if target_data:
             # Divide la cadena en líneas
             lines = target_data.split('\n')
-            
+            result = []
+
             # Procesa cada línea y crea un diccionario
-            result = [parse_line(line) for line in lines]
+            for line in lines:
+                number+=1
+                result.append(parse_line(line,number))
             
             post_data_to_api(result)
         else:

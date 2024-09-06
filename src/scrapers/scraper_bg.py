@@ -13,13 +13,16 @@ def extract_info(text):
 
     bank_id = get_bank_id('BG')
     results = []
+    number = 0
     for match in matches:
+        number += 1
         results.append({
-            'description': match[0].strip(),
+            'description': match[0].replace('-', ' ').strip(),
             'frequency': match[2],
             'currency' : 'USD',
             'card_type': 'debit',
             'bank': bank_id,
+            'number': number,
             'amount': match[1]
         })
 

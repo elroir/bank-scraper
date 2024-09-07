@@ -1,5 +1,5 @@
 """Project used for scraping bolivian banks."""
-from src.scrapers import scraper_bnb, scraper_bcp, scraper_bg,scraper_bu
+from src.scrapers import scraper_bnb, scraper_bisa, scraper_bcp, scraper_bg,scraper_bu
 
 
 def main():
@@ -10,6 +10,8 @@ def main():
     scraper_bcp.scrap()
     scraper_bg.scrap()
     scraper_bu.scrap()
+    scraper_bisa.scrap()
+    
 
 if __name__ == "__main__":
     main()

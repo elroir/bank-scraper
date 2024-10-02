@@ -1,10 +1,12 @@
 """This module contains the functions to upload the data to the API."""
-import requests
+import os
 
+import requests
 def post_data_to_api(data):
     """Posts the data to the API."""
-    api_url = "https://pb.elroir.cloud/api/collections/card_restriction/records"
+    api_url = f"{os.getenv('API_URL')}/collections/card_restriction/records"
     headers = {
+            "api-key"     : os.getenv('API_KEY'),
             "Content-Type": "application/json"
         }
 

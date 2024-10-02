@@ -1,6 +1,7 @@
 """Project used for scraping bolivian banks."""
-from src.scrapers import scraper_bnb, scraper_bisa, scraper_bcp, scraper_bg,scraper_bu,scraper_eco
 from dotenv import load_dotenv
+
+from src.scrapers import scraper_bnb, scraper_bisa, scraper_bcp, scraper_bg,scraper_bu,scraper_eco
 
 def main():
     """Main function."""

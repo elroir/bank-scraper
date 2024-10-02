@@ -6,8 +6,10 @@ import pdfplumber
 from src.uploader import post_data_to_api, get_bank_id
 
 def download_and_extract_table(url):
+    """Extracts required table"""
+
     # Descargar el PDF
-    response = requests.get(url)
+    response = requests.get(url,timeout=10)
     pdf_file = io.BytesIO(response.content)
     
     # Extraer tabla con pdfplumber
@@ -19,6 +21,7 @@ def download_and_extract_table(url):
 
 
 def scrap():
+    """Looks for data at url"""
     result = []
     bank_id = get_bank_id("ECO")
     url = "https://www.baneco.com.bo/assets/content/docs/footers/tarifario/Tarifario_Comisiones_Productos_y_Servicios-0242.pdf"

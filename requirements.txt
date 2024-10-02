@@ -12,6 +12,7 @@ pillow==10.4.0
 platformdirs==4.2.2
 pycparser==2.22
 pypdfium2==4.30.0
+python-dotenv==1.0.1
 requests==2.32.3
 soupsieve==2.6
 urllib3==2.2.2

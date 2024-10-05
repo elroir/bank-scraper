@@ -34,7 +34,8 @@ def upoad_dollar():
     crypto_id = get_dollar_id(name_en='Crypto',dollars=dollars)
     crypto_dollar = get_crypto_dollar(dollar_id=crypto_id)
     parallel_id = get_dollar_id(name_en='Parallel',dollars=dollars)
-    parallel_dollar = crypto_dollar | {'dollar_type': parallel_id}
+    parallel_dollar = crypto_dollar.copy()
+    parallel_dollar['dollar_type'] = parallel_id
     data = [crypto_dollar,parallel_dollar]
     api_url = f"{os.getenv('API_URL')}/collections/dollar/records"
     for dollar in data:

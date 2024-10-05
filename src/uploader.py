@@ -17,12 +17,11 @@ def post_data_to_api(data):
             print(f"Dato guardado exitosamente: {item['description']}")
         else:
             print(f"Error al guardar el dato: {item['description']}")
-            print("Código de estado:", response.status_code)
-            print("Respuesta:", response.text)
+
 
 def get_bank_id(bank_code):
     """Gets the bank ID from the API."""
-    bank_url = f"https://pb.elroir.cloud/api/collections/bank/records?filter=(code='{bank_code}')"
+    bank_url = f"{os.getenv('API_URL')}/collections/bank/records?filter=(code='{bank_code}')"
     response = requests.get(bank_url,timeout=10)
     bank_id = response.json()["items"][0]["id"]
     return bank_id

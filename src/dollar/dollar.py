@@ -1,5 +1,6 @@
 """This module retrieves data from criptoya.com and uploades to server"""
 import os
+from dotenv import load_dotenv
 
 import requests
 
@@ -22,6 +23,7 @@ def get_dollar_id(name_en,dollars):
 
 def upoad_dollar():
     """Uploads to dollar crypto"""
+    load_dotenv()
     crypto_url = f"{os.getenv('API_URL')}/collections/dollar_crypto/records"
     headers = {
             "api-key"     : os.getenv('API_KEY'),

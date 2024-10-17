@@ -18,14 +18,12 @@ def extract_first_limit_info(text):
     for pattern in patterns:
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
-            print(f"Patrón encontrado: {pattern}")
             groups = match.groups()
             if len(groups) == 3:
                 if groups[0].lower() in ['usd', 'bs.', 'u$']:
                     currency, amount, frequency = groups
                 else:
                     frequency, currency, amount = groups
-                
                 return {
                     "description": "compras por internet, POS, y retiros ATM",
                     "frequency": frequency.lower(),
@@ -33,7 +31,8 @@ def extract_first_limit_info(text):
                     "card_type": "debit",
                     "bank": bank_id,
                     "amount": int(amount),
-                    "number": 1
+                    "number": 1,
+                    "extra" : text
                 }
     
     print("No se encontró coincidencia con ningún patrón.")

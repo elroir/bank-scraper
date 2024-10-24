@@ -40,7 +40,7 @@ def scrap():
     # Open the PDF from the BytesIO object
     with pdfplumber.open(pdf_file) as pdf:
         # Get page 46 (index 45 since pdfplumber uses 0-based indexing)
-        page = pdf.pages[45]
+        page = pdf.pages[48]
 
         # Extract text from the page
         text = page.extract_text()

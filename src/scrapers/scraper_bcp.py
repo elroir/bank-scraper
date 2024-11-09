@@ -20,58 +20,35 @@ def scrap():
     if table:
         data_points = {}
         bank_id = get_bank_id("BCP")
-        found_4_1_6 = False
 
         # Recorrer todas las filas una sola vez
         for tr in table.find_all('tr'):
             text = tr.text.strip()
             normalized_text = text.replace('\xa0', ' ').strip()  # Normaliza el texto reemplazando caracteres no visibles
-            if normalized_text.startswith('4'):
+            if normalized_text.startswith('4.1.4.'):
                 # Guardar la fila según su identificador
                 key = normalized_text.split('\n')[0].strip()
                 data_points[key] = normalized_text.split('\n')
-                if key == '4.1.6.':
-                    found_4_1_6 = True
-            elif found_4_1_6 and not normalized_text.startswith('4'):
-                # Esta es la línea sin numeración después de 4.1.6.
-                data_points['unnumbered_after_4_1_6'] = normalized_text.split('\n')
-                break 
+                print(data_points)
+           
         # Extraer los títulos y los puntos específicos
         # column_titles = data_points.get('4.', [])
-        point_4_1_3 = data_points.get('4.1.3.', [])
-        point_4_1_4 = data_points.get('4.1.4', [])
-        unnumbered_point = data_points.get('unnumbered_after_4_1_6', [])
-
+        point_4_1_4 = data_points.get('4.1.4.', [])
+        extra = 'Servicio no disponible para cuentas abiertas a partir del 01/01/2023. Aplica el tipo de cambio utilizado por Visa Internacional.'
 
 
         data = [
             {
-                "description": point_4_1_3[1],
-                "frequency": point_4_1_3[5],
-                "currency": point_4_1_3[3],
-                "card_type": "debit",
-                "bank": bank_id,
-                "number": 1,
-                "amount": point_4_1_3[4]
-            },
-            {
-                "description": point_4_1_4[1],
+                "description": 'Compras físicas, por internet y retiros en ATM a nivel Internacional',
                 "frequency": point_4_1_4[5],
                 "currency": point_4_1_4[3],
                 "card_type": "debit",
                 "bank": bank_id,
-                "number": 2,
-                "amount": point_4_1_4[4]
-            },
-            {
-                "description": unnumbered_point[0],
-                "frequency": unnumbered_point[4] if len(unnumbered_point) > 4 else "",
-                "currency": unnumbered_point[2] if len(unnumbered_point) > 2 else "",
-                "card_type": "debit",
-                "bank": bank_id,
-                "number": 3,
-                "amount": unnumbered_point[3] if len(unnumbered_point) > 3 else ""
+                "number": 1,
+                "amount": point_4_1_4[4],
+                "extra" : extra
             }
+            
         ]
 
         post_data_to_api(data)

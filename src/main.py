@@ -8,13 +8,13 @@ def main():
     load_dotenv()
 
         # Ejecuta los scrapers
-    scraper_bnb.scrap()
+    # scraper_bnb.scrap()
     scraper_bcp.scrap()
-    scraper_bg.scrap()
-    scraper_bu.scrap()
-    scraper_bisa.scrap()
-    scraper_eco.scrap()
-    scraper_bf.scrap()
+    # scraper_bg.scrap()
+    # scraper_bu.scrap()
+    # scraper_bisa.scrap()
+    # scraper_eco.scrap()
+    # scraper_bf.scrap()
     
 
 if __name__ == "__main__":

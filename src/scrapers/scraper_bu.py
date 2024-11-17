@@ -51,7 +51,7 @@ def parse_line(line,number):
 def scrap():
     """Scrapes the BU tariff table and uploads the data to"""
     # URL del PDF
-    url = "https://bancounion.com.bo/PDF/TasasTarifario/Tarifario_Servicios-2024_10.pdf"
+    url = "https://bancounion.com.bo/PDF/TasasTarifario/Tarifario_Servicios-2024_11_actualizado.pdf"
 
     # Descarga el PDF
     response = requests.get(url, timeout=10)
